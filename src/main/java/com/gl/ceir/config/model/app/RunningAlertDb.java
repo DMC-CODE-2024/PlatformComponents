@@ -145,7 +145,7 @@ public class RunningAlertDb implements Serializable {
         this.alertProcess = alertProcess;
     }
 
-    public RunningAlertDb(String description, String alertId) {
+    public RunningAlertDb(String alertId ,String description ) {
         this.description = description;
         this.alertId = alertId;
     }
