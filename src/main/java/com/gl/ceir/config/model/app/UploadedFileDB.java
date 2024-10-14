@@ -28,7 +28,10 @@ public class UploadedFileDB implements Serializable {
     private Long id;
 
     @ColumnDefault("''")
-    public String sourceServerName, sourceFilePath, sourceFileName, appName, serverName, remarks, txnId;
+    public String sourceServerName, sourceFilePath, sourceFileName, appName, serverName, txnId;
+
+    @Column(name = "remark")
+    private String remarks;
 
     @ApiModelProperty(hidden = true)
     @ColumnDefault("''")
