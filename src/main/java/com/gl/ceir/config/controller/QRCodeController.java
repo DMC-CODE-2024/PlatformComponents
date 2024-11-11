@@ -32,12 +32,12 @@ public class QRCodeController {
     @Autowired
     ApplicationContext applicationContext;
 
- #   @Value("${qrcode.filepath}")
- #   private String filepath;
+ //   @Value("${qrcode.filepath}")
+ //   private String filepath;
 
     String QR_CODE_IMAGE_PATH = null;
 
-   # @PostConstruct
+   // @PostConstruct
     public void init() {
         try {
             Resource resource = applicationContext.getResource("file:QRCode.png");
@@ -48,9 +48,9 @@ public class QRCodeController {
         }
     }
 
-  #  @CrossOrigin(origins = "*", allowedHeaders = "*")
-  #  @PostMapping("/download/qrcode")
-  #  @ResponseBody
+  // @CrossOrigin(origins = "*", allowedHeaders = "*")
+  //  @PostMapping("/download/qrcode")
+  //  @ResponseBody
     public ResponseEntity downloadQRCode(@RequestBody Map<String, String> data) {
         Path path = null;
         Resource resource = null;
