@@ -32,15 +32,15 @@ public class QRCodeController {
     @Autowired
     ApplicationContext applicationContext;
 
-    @Value("${qrcode.filepath}")
-    private String filepath;
+ #   @Value("${qrcode.filepath}")
+ #   private String filepath;
 
     String QR_CODE_IMAGE_PATH = null;
 
-    @PostConstruct
+   # @PostConstruct
     public void init() {
         try {
-            Resource resource = applicationContext.getResource("file:" + filepath + "/QRCode.png");
+            Resource resource = applicationContext.getResource("file:QRCode.png");
             QR_CODE_IMAGE_PATH = resource.getFile().getAbsolutePath();
             logger.info("File Path :{}", QR_CODE_IMAGE_PATH);
         } catch (IOException ioException) {
@@ -48,9 +48,9 @@ public class QRCodeController {
         }
     }
 
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
-    @PostMapping("/download/qrcode")
-    @ResponseBody
+  #  @CrossOrigin(origins = "*", allowedHeaders = "*")
+  #  @PostMapping("/download/qrcode")
+  #  @ResponseBody
     public ResponseEntity downloadQRCode(@RequestBody Map<String, String> data) {
         Path path = null;
         Resource resource = null;
@@ -64,7 +64,7 @@ public class QRCodeController {
             logger.error("Resource not found", e.getMessage());
         }
         return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .contentType(MediaType.parseMediaType("ap:plication/octet-stream"))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
