@@ -37,6 +37,7 @@ public class Notification implements Serializable {
     private Integer checkImeiId;
     private String attachment;
     private String featureTxnId;
+    private String featureName;
 
     @Column(name = "sms_scheduled_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
