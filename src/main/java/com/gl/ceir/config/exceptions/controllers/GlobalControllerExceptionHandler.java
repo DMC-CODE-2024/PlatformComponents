@@ -11,7 +11,7 @@ import com.gl.ceir.config.dto.Result;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.gl.ceir.config.exceptions.*;
 import org.apache.logging.log4j.LogManager;

@@ -1,14 +1,13 @@
 package com.gl.ceir.config.model.app;
 
-import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
+ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,7 +22,6 @@ import java.util.List;
 public class UploadedFileDB implements Serializable {
 
     @Id
-    @ApiModelProperty(hidden = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -33,7 +31,6 @@ public class UploadedFileDB implements Serializable {
     @Column(name = "remark")
     private String remarks;
 
-    @ApiModelProperty(hidden = true)
     @ColumnDefault("''")
     public String destServerName, destFilePath;
 

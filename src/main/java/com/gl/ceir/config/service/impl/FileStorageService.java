@@ -43,31 +43,6 @@ public class FileStorageService {
         }
     }
 
-    public Resource loadFileAsResource(String fileName) {
 
-        var fileStorageLocation = Paths.get("/home/maverick/").toAbsolutePath().normalize();
-        logger.info("File Storage Location " + fileStorageLocation);
-        try {
-            Files.createDirectories(fileStorageLocation);
-        } catch (Exception ex) {
-            logger.error("Could not create the directory where the uploaded files will be stored.", ex);
-        }
-        try {
-            Path filePath = fileStorageLocation.resolve(fileName).normalize();
-            logger.info("File filePath " + filePath);
-
-            Resource resource = new UrlResource(filePath.toUri());
-
-            if (resource.exists()) {
-                return resource;
-            } else {
-                logger.error("File not found ie Resource Not exists " + fileName);
-                return null;
-            }
-        } catch (MalformedURLException ex) {
-            logger.error("File not found  " + fileName, ex);
-            return null;
-        }
-    }
 
 }

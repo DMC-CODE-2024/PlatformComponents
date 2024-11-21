@@ -1,12 +1,11 @@
 package com.gl.ceir.config.model.app;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -19,7 +18,6 @@ public class RunningAlertDb implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(hidden = true)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

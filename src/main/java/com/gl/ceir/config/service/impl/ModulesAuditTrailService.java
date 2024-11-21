@@ -31,7 +31,6 @@ public class ModulesAuditTrailService {
 
     public GenricResponse save(ModulesAuditTrail modulesAuditTrail) {
         try {
-            modulesAuditTrail.setModifiedOn(LocalDateTime.now());
             var response =modulesAuditTrailRepository.save(modulesAuditTrail);
             return new GenricResponse(0, "Success", String.valueOf(response.getId()));
         } catch (Exception e) {

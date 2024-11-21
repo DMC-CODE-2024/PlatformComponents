@@ -1,7 +1,6 @@
 package com.gl.ceir.config.controller;
 
 import com.gl.ceir.config.service.impl.QRCodeGenerator;
-import com.google.zxing.WriterException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Base64;
@@ -78,7 +76,7 @@ public class QRCodeController {
             } else {
                 image = QRCodeGenerator.getQRCodeImage(data, 250, 250);
             }
-        } catch (WriterException | IOException e) {
+        } catch (Exception  e) {
             logger.error("Qr code generator", e.getMessage());
         }
         // Convert Byte Array into Base64 Encode String

@@ -1,14 +1,13 @@
 package com.gl.ceir.config.model.audit;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -20,13 +19,13 @@ public class AuditTrail implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(hidden = true)
+    //@ApiModelProperty(hidden = true)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 
-    @ApiModelProperty(hidden = true)
+  //  @ApiModelProperty(hidden = true)
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime createdOn;
@@ -37,10 +36,6 @@ public class AuditTrail implements Serializable {
 
     private String jSessionId;
 
-    @ApiModelProperty(hidden = true)
-    @UpdateTimestamp
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
-    private LocalDateTime modifiedOn;
     private String roleType;
     private String publicIp;
     private String subFeature;
@@ -144,14 +139,6 @@ public class AuditTrail implements Serializable {
 
     public void setCreatedOn(LocalDateTime createdOn) {
         this.createdOn = createdOn;
-    }
-
-    public LocalDateTime getModifiedOn() {
-        return modifiedOn;
-    }
-
-    public void setModifiedOn(LocalDateTime modifiedOn) {
-        this.modifiedOn = modifiedOn;
     }
 
     public Long getUserId() {

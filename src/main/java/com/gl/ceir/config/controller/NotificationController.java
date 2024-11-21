@@ -9,13 +9,12 @@ import com.gl.ceir.config.model.app.UploadedFileDB;
 import com.gl.ceir.config.repository.app.UploadedFileDBRepository;
 import com.gl.ceir.config.service.impl.FileStorageService;
 import com.gl.ceir.config.service.impl.NotificationServiceImpl;
-import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.converter.json.MappingJacksonValue;
- import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +23,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 public class NotificationController {
+
+    @Value("${common_storage_flag}")
+    private String common_Storage_flag;
 
     @Value("${serverName}")
     private String serverName;
@@ -40,14 +42,14 @@ public class NotificationController {
     private NotificationServiceImpl notificationServiceImpl;
     private static final Logger logger = LogManager.getLogger(NotificationController.class);
 
-    @ApiOperation(value = "Save all Notifications", response = String.class)
+ //   @ApiOperation(value = "Save all Notifications", response = String.class)
     @PostMapping("addNotifications")
-    public MappingJacksonValue addNotifications(@RequestBody  Notification notification) {
+    public MappingJacksonValue addNotifications(@RequestBody Notification notification) {
         MappingJacksonValue mapping = new MappingJacksonValue(notificationServiceImpl.saveNotifications(notification));
         return mapping;
     }
 
-    @ApiOperation(value = "uploadFile with Notification", response = String.class)
+  //  @ApiOperation(value = "uploadFile with Notification", response = String.class)
     @PostMapping("fileAttachmentNotification")
     public MappingJacksonValue addNotificationsWithFile(@RequestParam("file") MultipartFile file,
                                                         @RequestParam(required = true) String txnId,
@@ -61,18 +63,22 @@ public class NotificationController {
         notif.setEmail(email);
         notif.setMessage(message);
         notif.setSubject(subject);
-        notif.setMsgLang(msgLang == null  || msgLang.isEmpty() ? "en" : msgLang.equalsIgnoreCase("kh") ? "kh" : "en");    // needs refactoring
+        notif.setMsgLang(msgLang == null || msgLang.isEmpty() ? "en" : msgLang.equalsIgnoreCase("kh") ? "kh" : "en");    // needs refactoring
         notif.setMsgLang(msgLang);
         notif.setFeatureTxnId(txnId);
         String filePath = fileStorageService.storeFile(notif, file);
         notif.setAttachment(filePath + "/" + file.getOriginalFilename());
-        UploadedFileDB uploadedFileDB = new UploadedFileDB(serverName,
-                filePath, file.getOriginalFilename(),
-                "Email Attachment",
-                "", "Email Attachment file to be synced",
-                txnId, destServerName, filePath);
-        logger.info(" Going to save data in file_to_sync :" + uploadedFileDB.toString());
-        var uploadFile = uploadedFileDBRepository.save(uploadedFileDB);
+
+        if (common_Storage_flag.equalsIgnoreCase("true")) {
+            UploadedFileDB uploadedFileDB = new UploadedFileDB(serverName,
+                    filePath, file.getOriginalFilename(),
+                    "Email Attachment",
+                    "", "Email Attachment file to be synced",
+                    txnId, destServerName, filePath);
+            logger.info(" Going to save data in file_to_sync :" + uploadedFileDB.toString());
+            var uploadFile = uploadedFileDBRepository.save(uploadedFileDB);
+        }
+
         logger.info(" notification req:" + notif.toString());
         MappingJacksonValue mapping = new MappingJacksonValue(notificationServiceImpl.saveNotifications(notif));
         return mapping;

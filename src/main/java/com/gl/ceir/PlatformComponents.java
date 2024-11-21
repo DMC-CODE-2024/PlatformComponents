@@ -11,9 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableConfigurationProperties
 @EntityScan({"com.gl.ceir.config"})
-
 @ComponentScan({"com.gl.ceir"})
-
 @EnableEncryptableProperties
 
 public class PlatformComponents {

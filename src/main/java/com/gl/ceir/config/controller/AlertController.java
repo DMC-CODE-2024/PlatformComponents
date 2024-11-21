@@ -6,7 +6,6 @@ package com.gl.ceir.config.controller;
 
 import com.gl.ceir.config.model.app.RunningAlertDb;
 import com.gl.ceir.config.service.impl.AlertServiceImpl;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
@@ -18,14 +17,14 @@ public class AlertController {
 
     @Autowired
     private AlertServiceImpl alertServiceImpl;
-    @ApiOperation(value = "Raise Alert by id", response = String.class)
+ //   @ApiOperation(value = "Raise Alert by id", response = String.class)
     @RequestMapping(path = "/alert/{id}", method = RequestMethod.GET)
     public MappingJacksonValue raiseAlertById(@PathVariable(value = "id") String id) {
         return new MappingJacksonValue(alertServiceImpl.raiseAlertById(id));
     }
 
     @PostMapping("/alert")
-    @ApiOperation(value = "Raise Alert ", response = String.class)
+  //  @ApiOperation(value = "Raise Alert ", response = String.class)
     public MappingJacksonValue save(@RequestBody Map<String, String> data) {
         return new MappingJacksonValue(alertServiceImpl.saveAlertWithParam(data));
     }
