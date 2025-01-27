@@ -66,6 +66,7 @@ public class AlertServiceImpl {
             }
             logger.info("Final Description {}", desc);
             runningAlertDb.setDescription(desc);
+            runningAlertDb.setFeatureName(alertDb.getFeature());
             var response = runningAlertDbRepository.save(runningAlertDb);
             return new GenricResponse(0, "Success", String.valueOf(response.getId()));
         } catch (Exception e) {
